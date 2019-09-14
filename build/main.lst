@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccGvj6E4.s 			page 1
+ARM GAS  /tmp/cc7NV9ff.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -29,40 +29,64 @@ ARM GAS  /tmp/ccGvj6E4.s 			page 1
    2:Src/main.c    **** #include "main.h"
    3:Src/main.c    **** #include"stm32f1xx.h"
    4:Src/main.c    **** int main(void)
-   5:Src/main.c    **** {
-  26              		.loc 1 5 0
+   5:Src/main.c    **** 
+   6:Src/main.c    **** 
+   7:Src/main.c    **** {
+  26              		.loc 1 7 0
   27              		.cfi_startproc
   28              		@ Volatile: function does not return.
   29              		@ args = 0, pretend = 0, frame = 0
   30              		@ frame_needed = 0, uses_anonymous_args = 0
   31              		@ link register save eliminated.
-  32              	.L2:
-  33 0000 FEE7     		b	.L2
-  34              		.cfi_endproc
-  35              	.LFE65:
-  37              		.section	.text.Error_Handler,"ax",%progbits
-  38              		.align	1
-  39              		.global	Error_Handler
-  40              		.syntax unified
-  41              		.thumb
-  42              		.thumb_func
-  43              		.fpu softvfp
-  45              	Error_Handler:
-  46              	.LFB66:
-   6:Src/main.c    **** 
-   7:Src/main.c    **** 
-   8:Src/main.c    ****   while (1)
-   9:Src/main.c    ****   {
-  10:Src/main.c    **** 
-  11:Src/main.c    ****   }
-  12:Src/main.c    **** }
-  13:Src/main.c    **** 
-  14:Src/main.c    **** 
-ARM GAS  /tmp/ccGvj6E4.s 			page 2
+   8:Src/main.c    **** 
+   9:Src/main.c    **** RCC->APB2ENR|=RCC_APB2ENR_IOPCEN;
+  32              		.loc 1 9 0
+  33 0000 0A4A     		ldr	r2, .L3
+  34 0002 9369     		ldr	r3, [r2, #24]
+  35 0004 43F01003 		orr	r3, r3, #16
+  36 0008 9361     		str	r3, [r2, #24]
+  10:Src/main.c    **** GPIOC->CRH|=GPIO_CRH_MODE13_0;
+  37              		.loc 1 10 0
+  38 000a A2F58032 		sub	r2, r2, #65536
+  39 000e 5368     		ldr	r3, [r2, #4]
+  40 0010 43F48013 		orr	r3, r3, #1048576
+  41 0014 5360     		str	r3, [r2, #4]
+  42              	.L2:
+  11:Src/main.c    ****   while (1)
+  12:Src/main.c    ****   {
+  13:Src/main.c    **** GPIOC->BSRR|=GPIO_BSRR_BR13;
+  43              		.loc 1 13 0 discriminator 1
+  44 0016 064B     		ldr	r3, .L3+4
+  45 0018 1A69     		ldr	r2, [r3, #16]
+ARM GAS  /tmp/cc7NV9ff.s 			page 2
 
 
-  15:Src/main.c    **** 
-  16:Src/main.c    **** 
+  46 001a 42F00052 		orr	r2, r2, #536870912
+  47 001e 1A61     		str	r2, [r3, #16]
+  14:Src/main.c    **** GPIOC->BSRR|=GPIO_BSRR_BS13;
+  48              		.loc 1 14 0 discriminator 1
+  49 0020 1A69     		ldr	r2, [r3, #16]
+  50 0022 42F40052 		orr	r2, r2, #8192
+  51 0026 1A61     		str	r2, [r3, #16]
+  52 0028 F5E7     		b	.L2
+  53              	.L4:
+  54 002a 00BF     		.align	2
+  55              	.L3:
+  56 002c 00100240 		.word	1073876992
+  57 0030 00100140 		.word	1073811456
+  58              		.cfi_endproc
+  59              	.LFE65:
+  61              		.section	.text.Error_Handler,"ax",%progbits
+  62              		.align	1
+  63              		.global	Error_Handler
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  67              		.fpu softvfp
+  69              	Error_Handler:
+  70              	.LFB66:
+  15:Src/main.c    ****   }
+  16:Src/main.c    **** }
   17:Src/main.c    **** 
   18:Src/main.c    **** 
   19:Src/main.c    **** 
@@ -74,33 +98,42 @@ ARM GAS  /tmp/ccGvj6E4.s 			page 1
   25:Src/main.c    **** 
   26:Src/main.c    **** 
   27:Src/main.c    **** 
-  28:Src/main.c    **** void Error_Handler(void)
-  29:Src/main.c    **** {
-  47              		.loc 1 29 0
-  48              		.cfi_startproc
-  49              		@ args = 0, pretend = 0, frame = 0
-  50              		@ frame_needed = 0, uses_anonymous_args = 0
-  51              		@ link register save eliminated.
+  28:Src/main.c    **** 
+  29:Src/main.c    **** 
   30:Src/main.c    **** 
-  31:Src/main.c    **** }
-  52              		.loc 1 31 0
-  53 0000 7047     		bx	lr
-  54              		.cfi_endproc
-  55              	.LFE66:
-  57              		.text
-  58              	.Letext0:
-  59              		.file 2 "/usr/include/newlib/machine/_default_types.h"
-  60              		.file 3 "/usr/include/newlib/sys/_stdint.h"
-  61              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
-  62              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
-ARM GAS  /tmp/ccGvj6E4.s 			page 3
+  31:Src/main.c    **** 
+  32:Src/main.c    **** void Error_Handler(void)
+  33:Src/main.c    **** {
+  71              		.loc 1 33 0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              		@ link register save eliminated.
+  34:Src/main.c    **** 
+  35:Src/main.c    **** }
+  76              		.loc 1 35 0
+  77 0000 7047     		bx	lr
+  78              		.cfi_endproc
+  79              	.LFE66:
+  81              		.text
+  82              	.Letext0:
+  83              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ARM GAS  /tmp/cc7NV9ff.s 			page 3
+
+
+  84              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+  85              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+  86              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+  87              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ARM GAS  /tmp/cc7NV9ff.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccGvj6E4.s:16     .text.main:0000000000000000 $t
-     /tmp/ccGvj6E4.s:23     .text.main:0000000000000000 main
-     /tmp/ccGvj6E4.s:38     .text.Error_Handler:0000000000000000 $t
-     /tmp/ccGvj6E4.s:45     .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/cc7NV9ff.s:16     .text.main:0000000000000000 $t
+     /tmp/cc7NV9ff.s:23     .text.main:0000000000000000 main
+     /tmp/cc7NV9ff.s:56     .text.main:000000000000002c $d
+     /tmp/cc7NV9ff.s:62     .text.Error_Handler:0000000000000000 $t
+     /tmp/cc7NV9ff.s:69     .text.Error_Handler:0000000000000000 Error_Handler
 
 NO UNDEFINED SYMBOLS
