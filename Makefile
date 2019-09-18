@@ -38,7 +38,15 @@ BUILD_DIR = build
 C_SOURCES =  \
 Src/main.c \
 Src/stm32f1xx_it.c \
-Src/system_stm32f1xx.c  
+Src/system_stm32f1xx.c \
+Drivers/adc/adc.c \
+Drivers/flash/flash.c \
+Drivers/gpio/gpio.c \
+Drivers/i2c/i2c.c \
+Drivers/init/init.c \
+Drivers/input/input.c \
+Drivers/rcc/rcc.c \
+Drivers/ssd1306/ssd1306.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -87,8 +95,7 @@ AS_DEFS =
 # C defines
 C_DEFS =  \
 -DSTM32F103xB \
-
-
+-DARM_MATH_CM3
 # AS includes
 AS_INCLUDES = 
 
@@ -96,7 +103,15 @@ AS_INCLUDES =
 C_INCLUDES =  \
 -IInc \
 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include \
--IDrivers/CMSIS/Include
+-IDrivers/CMSIS/Include \
+-IDrivers/adc \
+-IDrivers/flash \
+-IDrivers/gpio \
+-IDrivers/i2c \
+-IDrivers/init \
+-IDrivers/input \
+-IDrivers/rcc \
+-IDrivers/ssd1306 \
 
 
 # compile gcc flags
@@ -120,8 +135,8 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 LDSCRIPT = STM32F103C8Tx_FLASH.ld
 
 # libraries
-LIBS = -lc -lm -lnosys 
-LIBDIR = 
+LIBS = -lc -lm -lnosys
+LIBDIR = -LDrivers/CMSIS/Lib/GCC
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
 # default action: build all

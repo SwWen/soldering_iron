@@ -149,9 +149,9 @@ void ssd1306_FillDisplay(unsigned char data)
         for (x=0; x<SSD1306_WIDTH; x++)
         {
             ssd1306_buf1[x] = data;
-        };
+        }
         ssd1306_SendData(ssd1306_buf1, SSD1306_WIDTH );
-    };
+    }
     ssd1306_SetCursor(0, 0);
 
 }

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc7NV9ff.s 			page 1
+ARM GAS  /tmp/cc2klTdh.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -18,122 +18,283 @@ ARM GAS  /tmp/cc7NV9ff.s 			page 1
   15              		.section	.text.main,"ax",%progbits
   16              		.align	1
   17              		.global	main
-  18              		.syntax unified
-  19              		.thumb
-  20              		.thumb_func
-  21              		.fpu softvfp
-  23              	main:
-  24              	.LFB65:
-  25              		.file 1 "Src/main.c"
-   1:Src/main.c    **** 
-   2:Src/main.c    **** #include "main.h"
-   3:Src/main.c    **** #include"stm32f1xx.h"
-   4:Src/main.c    **** int main(void)
-   5:Src/main.c    **** 
-   6:Src/main.c    **** 
-   7:Src/main.c    **** {
-  26              		.loc 1 7 0
-  27              		.cfi_startproc
-  28              		@ Volatile: function does not return.
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
-   8:Src/main.c    **** 
-   9:Src/main.c    **** RCC->APB2ENR|=RCC_APB2ENR_IOPCEN;
-  32              		.loc 1 9 0
-  33 0000 0A4A     		ldr	r2, .L3
-  34 0002 9369     		ldr	r3, [r2, #24]
-  35 0004 43F01003 		orr	r3, r3, #16
-  36 0008 9361     		str	r3, [r2, #24]
-  10:Src/main.c    **** GPIOC->CRH|=GPIO_CRH_MODE13_0;
-  37              		.loc 1 10 0
-  38 000a A2F58032 		sub	r2, r2, #65536
-  39 000e 5368     		ldr	r3, [r2, #4]
-  40 0010 43F48013 		orr	r3, r3, #1048576
-  41 0014 5360     		str	r3, [r2, #4]
-  42              	.L2:
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	main:
+  25              	.LFB65:
+  26              		.file 1 "Src/main.c"
+   1:Src/main.c    **** #include "main.h"
+   2:Src/main.c    **** #include"stm32f1xx.h"
+   3:Src/main.c    **** #include"init.h"
+   4:Src/main.c    **** #include"rcc.h"
+   5:Src/main.c    **** #include"gpio.h"
+   6:Src/main.c    **** int main(void){
+  27              		.loc 1 6 15 view -0
+  28              		.cfi_startproc
+  29              		@ Volatile: function does not return.
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+   7:Src/main.c    **** 
+   8:Src/main.c    ****     rcc_init();
+  37              		.loc 1 8 5 view .LVU1
+  38 0002 FFF7FEFF 		bl	rcc_init
+  39              	.LVL0:
+   9:Src/main.c    ****     init();
+  40              		.loc 1 9 5 view .LVU2
+  41 0006 FFF7FEFF 		bl	init
+  42              	.LVL1:
+  10:Src/main.c    ****     gpio_init();
+  43              		.loc 1 10 5 view .LVU3
+  44 000a FFF7FEFF 		bl	gpio_init
+  45              	.LVL2:
+  46              	.L2:
   11:Src/main.c    ****   while (1)
+  47              		.loc 1 11 3 discriminator 1 view .LVU4
+ARM GAS  /tmp/cc2klTdh.s 			page 2
+
+
   12:Src/main.c    ****   {
-  13:Src/main.c    **** GPIOC->BSRR|=GPIO_BSRR_BR13;
-  43              		.loc 1 13 0 discriminator 1
-  44 0016 064B     		ldr	r3, .L3+4
-  45 0018 1A69     		ldr	r2, [r3, #16]
-ARM GAS  /tmp/cc7NV9ff.s 			page 2
-
-
-  46 001a 42F00052 		orr	r2, r2, #536870912
-  47 001e 1A61     		str	r2, [r3, #16]
-  14:Src/main.c    **** GPIOC->BSRR|=GPIO_BSRR_BS13;
-  48              		.loc 1 14 0 discriminator 1
-  49 0020 1A69     		ldr	r2, [r3, #16]
-  50 0022 42F40052 		orr	r2, r2, #8192
-  51 0026 1A61     		str	r2, [r3, #16]
-  52 0028 F5E7     		b	.L2
-  53              	.L4:
-  54 002a 00BF     		.align	2
-  55              	.L3:
-  56 002c 00100240 		.word	1073876992
-  57 0030 00100140 		.word	1073811456
-  58              		.cfi_endproc
-  59              	.LFE65:
-  61              		.section	.text.Error_Handler,"ax",%progbits
-  62              		.align	1
-  63              		.global	Error_Handler
-  64              		.syntax unified
-  65              		.thumb
-  66              		.thumb_func
-  67              		.fpu softvfp
-  69              	Error_Handler:
-  70              	.LFB66:
-  15:Src/main.c    ****   }
-  16:Src/main.c    **** }
-  17:Src/main.c    **** 
-  18:Src/main.c    **** 
+  13:Src/main.c    ****       Delay_ms(200);
+  48              		.loc 1 13 7 discriminator 1 view .LVU5
+  49 000e C820     		movs	r0, #200
+  50 0010 FFF7FEFF 		bl	Delay_ms
+  51              	.LVL3:
+  14:Src/main.c    **** GPIOC->BSRR|=GPIO_BSRR_BR13;
+  52              		.loc 1 14 1 discriminator 1 view .LVU6
+  53              		.loc 1 14 12 is_stmt 0 discriminator 1 view .LVU7
+  54 0014 064C     		ldr	r4, .L4
+  55 0016 2369     		ldr	r3, [r4, #16]
+  56 0018 43F00053 		orr	r3, r3, #536870912
+  57 001c 2361     		str	r3, [r4, #16]
+  15:Src/main.c    **** Delay_ms(200);
+  58              		.loc 1 15 1 is_stmt 1 discriminator 1 view .LVU8
+  59 001e C820     		movs	r0, #200
+  60 0020 FFF7FEFF 		bl	Delay_ms
+  61              	.LVL4:
+  16:Src/main.c    **** GPIOC->BSRR|=GPIO_BSRR_BS13;
+  62              		.loc 1 16 1 discriminator 1 view .LVU9
+  63              		.loc 1 16 12 is_stmt 0 discriminator 1 view .LVU10
+  64 0024 2369     		ldr	r3, [r4, #16]
+  65 0026 43F40053 		orr	r3, r3, #8192
+  66 002a 2361     		str	r3, [r4, #16]
+  11:Src/main.c    ****   {
+  67              		.loc 1 11 9 is_stmt 1 discriminator 1 view .LVU11
+  68 002c EFE7     		b	.L2
+  69              	.L5:
+  70 002e 00BF     		.align	2
+  71              	.L4:
+  72 0030 00100140 		.word	1073811456
+  73              		.cfi_endproc
+  74              	.LFE65:
+  76              		.section	.text.DoFullPID,"ax",%progbits
+  77              		.align	1
+  78              		.global	DoFullPID
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  82              		.fpu softvfp
+  84              	DoFullPID:
+  85              	.LVL5:
+  86              	.LFB66:
+  17:Src/main.c    ****   }
+  18:Src/main.c    **** }
   19:Src/main.c    **** 
   20:Src/main.c    **** 
   21:Src/main.c    **** 
   22:Src/main.c    **** 
-  23:Src/main.c    **** 
-  24:Src/main.c    **** 
-  25:Src/main.c    **** 
-  26:Src/main.c    **** 
-  27:Src/main.c    **** 
-  28:Src/main.c    **** 
-  29:Src/main.c    **** 
-  30:Src/main.c    **** 
+  23:Src/main.c    **** uint16_t DoFullPID(uint16_t In, uint16_t Ref, uint16_t *Coeff)
+  24:Src/main.c    **** {
+  87              		.loc 1 24 1 view -0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92              		.loc 1 24 1 is_stmt 0 view .LVU13
+ARM GAS  /tmp/cc2klTdh.s 			page 3
+
+
+  93 0000 30B4     		push	{r4, r5}
+  94              	.LCFI1:
+  95              		.cfi_def_cfa_offset 8
+  96              		.cfi_offset 4, -8
+  97              		.cfi_offset 5, -4
+  25:Src/main.c    ****   uint16_t Kp, Ki, Kd, Output, Error;
+  98              		.loc 1 25 3 is_stmt 1 view .LVU14
+  26:Src/main.c    ****   static uint16_t IntTerm_C, PrevError_C;
+  99              		.loc 1 26 3 view .LVU15
+  27:Src/main.c    ****   Error = Ref - In;
+ 100              		.loc 1 27 3 view .LVU16
+ 101              		.loc 1 27 9 is_stmt 0 view .LVU17
+ 102 0002 091A     		subs	r1, r1, r0
+ 103              	.LVL6:
+ 104              		.loc 1 27 9 view .LVU18
+ 105 0004 89B2     		uxth	r1, r1
+ 106              	.LVL7:
+  28:Src/main.c    ****   Kp = Coeff[0];
+ 107              		.loc 1 28 3 is_stmt 1 view .LVU19
+ 108              		.loc 1 28 6 is_stmt 0 view .LVU20
+ 109 0006 1488     		ldrh	r4, [r2]
+ 110              	.LVL8:
+  29:Src/main.c    ****   Ki = Coeff[1];
+ 111              		.loc 1 29 3 is_stmt 1 view .LVU21
+ 112              		.loc 1 29 6 is_stmt 0 view .LVU22
+ 113 0008 5388     		ldrh	r3, [r2, #2]
+ 114              	.LVL9:
+  30:Src/main.c    ****   Kd = Coeff[2];
+ 115              		.loc 1 30 3 is_stmt 1 view .LVU23
+ 116              		.loc 1 30 6 is_stmt 0 view .LVU24
+ 117 000a 9088     		ldrh	r0, [r2, #4]
+ 118              	.LVL10:
   31:Src/main.c    **** 
-  32:Src/main.c    **** void Error_Handler(void)
-  33:Src/main.c    **** {
-  71              		.loc 1 33 0
-  72              		.cfi_startproc
-  73              		@ args = 0, pretend = 0, frame = 0
-  74              		@ frame_needed = 0, uses_anonymous_args = 0
-  75              		@ link register save eliminated.
-  34:Src/main.c    **** 
-  35:Src/main.c    **** }
-  76              		.loc 1 35 0
-  77 0000 7047     		bx	lr
-  78              		.cfi_endproc
-  79              	.LFE66:
-  81              		.text
-  82              	.Letext0:
-  83              		.file 2 "/usr/include/newlib/machine/_default_types.h"
-ARM GAS  /tmp/cc7NV9ff.s 			page 3
+  32:Src/main.c    ****   IntTerm_C += Ki*Error;
+ 119              		.loc 1 32 3 is_stmt 1 view .LVU25
+ 120              		.loc 1 32 18 is_stmt 0 view .LVU26
+ 121 000c 03FB01F3 		mul	r3, r3, r1
+ 122              	.LVL11:
+ 123              		.loc 1 32 18 view .LVU27
+ 124 0010 9BB2     		uxth	r3, r3
+ 125              		.loc 1 32 13 view .LVU28
+ 126 0012 094A     		ldr	r2, .L8
+ 127              	.LVL12:
+ 128              		.loc 1 32 13 view .LVU29
+ 129 0014 1588     		ldrh	r5, [r2]
+ 130 0016 2B44     		add	r3, r3, r5
+ 131 0018 9BB2     		uxth	r3, r3
+ 132 001a 1380     		strh	r3, [r2]	@ movhi
+  33:Src/main.c    ****   Output = Kp * Error;
+ 133              		.loc 1 33 3 is_stmt 1 view .LVU30
+ 134              		.loc 1 33 10 is_stmt 0 view .LVU31
+ 135 001c 04FB01F2 		mul	r2, r4, r1
+ 136 0020 92B2     		uxth	r2, r2
+ 137              	.LVL13:
+  34:Src/main.c    ****   Output += IntTerm_C;
+ 138              		.loc 1 34 3 is_stmt 1 view .LVU32
+ 139              		.loc 1 34 10 is_stmt 0 view .LVU33
+ARM GAS  /tmp/cc2klTdh.s 			page 4
 
 
-  84              		.file 3 "/usr/include/newlib/sys/_stdint.h"
-  85              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
-  86              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
-  87              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
-ARM GAS  /tmp/cc7NV9ff.s 			page 4
+ 140 0022 1344     		add	r3, r3, r2
+ 141 0024 9BB2     		uxth	r3, r3
+ 142              	.LVL14:
+  35:Src/main.c    ****   Output += Kd * (Error - PrevError_C);
+ 143              		.loc 1 35 3 is_stmt 1 view .LVU34
+ 144              		.loc 1 35 10 is_stmt 0 view .LVU35
+ 145 0026 054C     		ldr	r4, .L8+4
+ 146              	.LVL15:
+ 147              		.loc 1 35 10 view .LVU36
+ 148 0028 2288     		ldrh	r2, [r4]
+ 149 002a 8A1A     		subs	r2, r1, r2
+ 150 002c 02FB0030 		mla	r0, r2, r0, r3
+ 151              	.LVL16:
+  36:Src/main.c    **** 
+  37:Src/main.c    ****   PrevError_C = Error;
+ 152              		.loc 1 37 3 is_stmt 1 view .LVU37
+ 153              		.loc 1 37 15 is_stmt 0 view .LVU38
+ 154 0030 2180     		strh	r1, [r4]	@ movhi
+  38:Src/main.c    **** 
+  39:Src/main.c    ****   return (Output);
+ 155              		.loc 1 39 3 is_stmt 1 view .LVU39
+  40:Src/main.c    **** }
+ 156              		.loc 1 40 1 is_stmt 0 view .LVU40
+ 157 0032 80B2     		uxth	r0, r0
+ 158              		.loc 1 40 1 view .LVU41
+ 159 0034 30BC     		pop	{r4, r5}
+ 160              	.LCFI2:
+ 161              		.cfi_restore 5
+ 162              		.cfi_restore 4
+ 163              		.cfi_def_cfa_offset 0
+ 164 0036 7047     		bx	lr
+ 165              	.L9:
+ 166              		.align	2
+ 167              	.L8:
+ 168 0038 00000000 		.word	.LANCHOR0
+ 169 003c 00000000 		.word	.LANCHOR1
+ 170              		.cfi_endproc
+ 171              	.LFE66:
+ 173              		.section	.text.Error_Handler,"ax",%progbits
+ 174              		.align	1
+ 175              		.global	Error_Handler
+ 176              		.syntax unified
+ 177              		.thumb
+ 178              		.thumb_func
+ 179              		.fpu softvfp
+ 181              	Error_Handler:
+ 182              	.LFB67:
+  41:Src/main.c    **** 
+  42:Src/main.c    **** 
+  43:Src/main.c    **** 
+  44:Src/main.c    **** 
+  45:Src/main.c    **** 
+  46:Src/main.c    **** 
+  47:Src/main.c    **** 
+  48:Src/main.c    **** 
+  49:Src/main.c    **** 
+  50:Src/main.c    **** 
+ARM GAS  /tmp/cc2klTdh.s 			page 5
+
+
+  51:Src/main.c    **** 
+  52:Src/main.c    **** void Error_Handler(void)
+  53:Src/main.c    **** {
+ 183              		.loc 1 53 1 is_stmt 1 view -0
+ 184              		.cfi_startproc
+ 185              		@ args = 0, pretend = 0, frame = 0
+ 186              		@ frame_needed = 0, uses_anonymous_args = 0
+ 187              		@ link register save eliminated.
+  54:Src/main.c    **** 
+  55:Src/main.c    **** }
+ 188              		.loc 1 55 1 view .LVU43
+ 189 0000 7047     		bx	lr
+ 190              		.cfi_endproc
+ 191              	.LFE67:
+ 193              		.section	.bss.IntTerm_C.4998,"aw",%nobits
+ 194              		.align	1
+ 195              		.set	.LANCHOR0,. + 0
+ 198              	IntTerm_C.4998:
+ 199 0000 0000     		.space	2
+ 200              		.section	.bss.PrevError_C.4999,"aw",%nobits
+ 201              		.align	1
+ 202              		.set	.LANCHOR1,. + 0
+ 205              	PrevError_C.4999:
+ 206 0000 0000     		.space	2
+ 207              		.text
+ 208              	.Letext0:
+ 209              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 210              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 211              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 212              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 213              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 214              		.file 7 "Drivers/rcc/rcc.h"
+ 215              		.file 8 "Drivers/init/init.h"
+ 216              		.file 9 "Drivers/gpio/gpio.h"
+ARM GAS  /tmp/cc2klTdh.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/cc7NV9ff.s:16     .text.main:0000000000000000 $t
-     /tmp/cc7NV9ff.s:23     .text.main:0000000000000000 main
-     /tmp/cc7NV9ff.s:56     .text.main:000000000000002c $d
-     /tmp/cc7NV9ff.s:62     .text.Error_Handler:0000000000000000 $t
-     /tmp/cc7NV9ff.s:69     .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/cc2klTdh.s:16     .text.main:0000000000000000 $t
+     /tmp/cc2klTdh.s:24     .text.main:0000000000000000 main
+     /tmp/cc2klTdh.s:72     .text.main:0000000000000030 $d
+     /tmp/cc2klTdh.s:77     .text.DoFullPID:0000000000000000 $t
+     /tmp/cc2klTdh.s:84     .text.DoFullPID:0000000000000000 DoFullPID
+     /tmp/cc2klTdh.s:168    .text.DoFullPID:0000000000000038 $d
+     /tmp/cc2klTdh.s:174    .text.Error_Handler:0000000000000000 $t
+     /tmp/cc2klTdh.s:181    .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/cc2klTdh.s:194    .bss.IntTerm_C.4998:0000000000000000 $d
+     /tmp/cc2klTdh.s:198    .bss.IntTerm_C.4998:0000000000000000 IntTerm_C.4998
+     /tmp/cc2klTdh.s:201    .bss.PrevError_C.4999:0000000000000000 $d
+     /tmp/cc2klTdh.s:205    .bss.PrevError_C.4999:0000000000000000 PrevError_C.4999
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+rcc_init
+init
+gpio_init
+Delay_ms

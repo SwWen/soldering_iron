@@ -2,3 +2,11 @@ Drivers/CMSIS/Device/ST/STM32F1xx/Include
 Drivers/CMSIS/Include
 Inc
 .
+Drivers/adc
+Drivers/flash
+Drivers/i2c
+Drivers/ssd1306
+Drivers/input
+Drivers/gpio
+Drivers/init
+Drivers/rcc
