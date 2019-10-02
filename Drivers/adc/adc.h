@@ -18,8 +18,7 @@ typedef union
     } Reg;
 } FILTER_REG;
 
-unsigned short int  filter_sred(unsigned short int ADC_val,
-unsigned short int* buf, FILTER_REG* filter_reg);
+uint16_t  filter_sred(uint16_t ADC_val,uint16_t* buf, FILTER_REG* filter_reg);
 
 
-#endif // TIM_PWM_H_INCLUDED
+#endif // ADC_H_INCLUDED

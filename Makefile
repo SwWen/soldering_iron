@@ -37,17 +37,16 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Src/main.c \
+Src/solder.c \
 Src/stm32f1xx_it.c \
 Src/system_stm32f1xx.c \
 Drivers/adc/adc.c \
 Drivers/flash/flash.c \
 Drivers/gpio/gpio.c \
-Drivers/i2c/i2c.c \
 Drivers/init/init.c \
 Drivers/input/input.c \
 Drivers/rcc/rcc.c \
-Drivers/ssd1306/ssd1306.c
-
+Drivers/disp/disp.c \
 # ASM sources
 ASM_SOURCES =  \
 startup_stm32f103xb.s
@@ -107,12 +106,10 @@ C_INCLUDES =  \
 -IDrivers/adc \
 -IDrivers/flash \
 -IDrivers/gpio \
--IDrivers/i2c \
 -IDrivers/init \
 -IDrivers/input \
 -IDrivers/rcc \
--IDrivers/ssd1306 \
-
+-IDrivers/disp \
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections

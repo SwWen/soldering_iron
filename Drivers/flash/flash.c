@@ -1,7 +1,5 @@
-#include"flash.h"
+﻿#include"flash.h"
 #include"stm32f1xx.h"
-
-
 
 //pageAddress - любой адрес, принадлежащий стираемой странице
 void Internal_Flash_Erase(unsigned int pageAddress) {
@@ -38,8 +36,8 @@ Internal_Flash_Erase(address);
 	FLASH->CR &= ~(FLASH_CR_PG);
 }
 
-eep_t flash_read(uint32_t address) {
-	return (*(__IO eep_t*) address);
+eep_t flash_read(const uint32_t address) {
+    return (*(__IO eep_t*) address);
 }
 
 
